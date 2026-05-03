@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,9 +28,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //Route::middleware('auth')->group(function () {
 
-Route::get('/', function () {
-    return view('dashboard/index');
-})->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/finance', function () {
     return view('dashboard/finance');
