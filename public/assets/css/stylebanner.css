@@ -1,0 +1,19 @@
+.welcome-banner {
+  height: 180px;
+}
+
+@media (max-width: 768px) {
+  .welcome-banner {
+    height: auto;
+  }
+}
+.welcome-banner {
+  min-height: 150px;
+}
+.welcome-banner img {
+  max-height: 120px;
+  object-fit: contain;
+}
+.imagedroite{
+  text-align: right;
+}
