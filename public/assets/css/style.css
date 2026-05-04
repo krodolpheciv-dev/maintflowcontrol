@@ -31084,7 +31084,9 @@ div.dataTables_wrapper div.dt-row {
   background: var(--sidebar-accent);
 }
 
-
+.btn-light-primary:hover {
+    color: #fff !important;
+}
 /**  =====================
   FIN 37. CSS SideBar redefinis
 ==========================  **/
