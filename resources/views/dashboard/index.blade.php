@@ -160,7 +160,7 @@
 
             {{--  GRAPHIQUES Area Chart et Donut --}}
            <!--<div class="row g-2 align-items-stretch mt-0">-->
-		   <div class="col-12">
+           <div class="col-12">
 <div class="row row0 align-items-stretch mt-0">
                 {{-- Graphique : Évolution des flux financiers --}}
                 <div class="col-12 col-lg-6 d-flex" >
@@ -472,7 +472,7 @@
                 </div>
                 {{-- Fin Donut --}}
             </div>
-			</div>
+			   </div>
             {{-- FIN GRAPHIQUES --}}
 
 
