@@ -106,5 +106,9 @@
     font-size: 14px !important;
    
 }
+
+#flux-chart {
+  width: 100%;
+}
 </style>
 </head>
