@@ -14,48 +14,81 @@
       </a>
     </li>
 @if(request()->routeIs('dashboard'))
+
     <li class="pc-h-item d-none d-md-inline-flex" style="margin-left: 10px;">
       <form class="form-search">
         <i class="search-icon">
-        
-          <svg class="pc-icon"> <use xlink:href="#custom-folder-open"></use> </svg>
+          <svg class="pc-icon">
+            <use xlink:href="#custom-folder-open"></use>
+          </svg>
         </i>
-        
-         <select class="form-select" style="text-align: center;height: 45px;width: 230px;" >
-         <option value="" disabled selected>
-        Selectionner Projet
-    </option>
 
-    @forelse($projects ?? [] as $project)
-        <option value="{{ $project->id }}">
-            {{ $project->nom_projet }}
-        </option>
-    @empty
-        <option disabled>Aucun projet disponible</option>
-    @endforelse
+        <select class="form-select" style="text-align: center;height: 45px;width: 230px;">
+          <option value="" disabled selected>
+            Selectionner Projet
+          </option>
+
+          @forelse($projects ?? [] as $project)
+              <option value="{{ $project->id }}">
+                  {{ $project->nom_projet }}
+              </option>
+          @empty
+              <option disabled>Aucun projet disponible</option>
+          @endforelse
         </select>
       </form>
     </li>
 
     <li class="pc-h-item d-none d-md-inline-flex" style="width: 150px;margin-left: 10px;">
       <form class="form-search">
-       <i class="search-icon">
-  <svg class="pc-icon">
+        <i class="search-icon">
+          <svg class="pc-icon">
             <use xlink:href="#custom-calendar-1"></use>
           </svg>
-  </i>
+        </i>
 
-  <select class="form-select form-select-sm" style="text-align: center;height:45px; width:180px;">
-  <option selected>Ce mois</option>
-  <option>Mois dernier</option>
-  <option>3 derniers mois</option>
-  <option>6 derniers mois</option>
-  <option>Cette année</option>
-</select>
-       <input type="date" class="form-control" placeholder="Mois"  style="display:none;"/>
+        <select class="form-select form-select-sm"
+                style="text-align: center;height:45px; width:180px;">
+          <option selected>Ce mois</option>
+          <option>Mois dernier</option>
+          <option>3 derniers mois</option>
+          <option>6 derniers mois</option>
+          <option>Cette année</option>
+        </select>
+
+        <input type="date" class="form-control"
+               placeholder="Mois"
+               style="display:none;"/>
       </form>
     </li>
-  @endif
+
+@else
+
+    <li class="pc-h-item d-none d-md-inline-flex" style="margin-left: 10px;">
+      <form class="form-search">
+
+        <i class="search-icon">
+          <svg class="pc-icon">
+            <use xlink:href="#custom-menu"></use>
+          </svg>
+        </i>
+  <select class="form-select" style="text-align: center;height: 45px;width: 230px;">
+          <option value="" disabled selected>
+            Selectionner Projet
+          </option>
+
+          @forelse($projects ?? [] as $project)
+              <option value="{{ $project->id }}">
+                  {{ $project->nom_projet }}
+              </option>
+          @empty
+              <option disabled>Aucun projet disponible</option>
+          @endforelse
+        </select>
+      </form>
+    </li>
+
+@endif
 
   </ul>
 </div>

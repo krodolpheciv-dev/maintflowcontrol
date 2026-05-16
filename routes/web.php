@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Divers\RequeteCmController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,12 @@ Route::get('/finance', function () {
     return view('dashboard/finance');
 })->name('finance');
 
+Route::get('/demandecm', function () {
+    return view('forms/requetescm');
+})->name('demandecm');
+
+
+Route::get('/requetescm', [RequeteCmController::class, 'index'])->name('requetescm');
 
 Route::get('/analytics', function () {
     return view('dashboard/analytics');

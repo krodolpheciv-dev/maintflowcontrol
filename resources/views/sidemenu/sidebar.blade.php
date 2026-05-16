@@ -60,14 +60,14 @@ function isOpen($routes) {
         <li class="pc-item pc-hasmenu {{ isOpen(['demandes*','interventions*','validation*']) }}">
           <a href="#" class="pc-link">
             <span class="pc-micon"><i class="ti ti-calendar-event"></i></span>
-            <span class="pc-mtext">Maintenance</span>
+            <span class="pc-mtext">Maintenances</span>
             <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>
           </a>
           <ul class="pc-submenu">
             <li class="pc-item {{ isActive('demandes*') }}">
-              <a href="#" class="pc-link">
+              <a href="{{ route('requetescm') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-file-text"></i></span>
-                <span class="pc-mtext">Demandes CM</span>
+                <span class="pc-mtext">Requetes CM</span>
               </a>
             </li>
             <li class="pc-item {{ isActive('interventions*') }}">

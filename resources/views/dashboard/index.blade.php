@@ -163,7 +163,7 @@
            <div class="col-12">
 <div class="row row0 align-items-stretch mt-0">
                 {{-- Graphique : Évolution des flux financiers --}}
-                <div class="col-12 col-lg-6 d-flex" >
+                <div class="col-12 col-lg-7 d-flex" >
                     <div class="card shadow-sm border-0 rounded-4 overflow-hidden w-100">
                         <div class="card-body p-3 d-flex flex-column">
 
@@ -274,7 +274,7 @@
                 {{-- Fin Area Chart --}}
 
                 {{-- Donut Répartition des dépenses --}}
-                <div class="col-12 col-lg-6 d-flex">
+                <div class="col-12 col-lg-5 d-flex">
 
                     <div class="card shadow-sm border-0 rounded-4 w-100">
                         <div class="card-body p-3 d-flex flex-column">

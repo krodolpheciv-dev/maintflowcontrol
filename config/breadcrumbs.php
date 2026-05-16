@@ -11,6 +11,16 @@ return [
             ['label' => 'Créer utilisateurs'],
         ],
     ],
+     'requetescm' => [
+        'title' => 'Requêtes CM',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Maintenance Corrective'],
+            ['label' => 'Maintenances'],
+            ['label' => 'Requêtes CM'],
+        
+        ],
+    ],
   'finance' => [
         'title' => 'Finance',
         'items' => [

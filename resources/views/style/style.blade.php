@@ -37,6 +37,13 @@
 <script defer src="https://phpstack-207002-5085356.cloudwaysapps.com/pixel/"></script>
 <link rel="stylesheet" href="{{ asset('assets/css/style-preset.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/css/stylebanner.css') }}" />
+
+
+
+
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins/style.css') }}" />
+   
+
 <style>
   .circle-arrow {
   width: 38px;
@@ -109,6 +116,100 @@
 
 #flux-chart {
   width: 100%;
+}
+
+.sidebar-ui {
+  padding: 8px 10px 24px;
+  padding-left: 10px;
+  background: #fff;
+  height: 100vh;
+  overflow-y: auto !important;
+  list-style: none;
+  margin: 0;
+  margin-bottom: 0px;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #999 transparent;
+}
+
+/* Chrome, Edge, Safari */
+.sidebar-ui::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-ui::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 10px;
+}
+
+.sidebar-ui::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-ui {
+  padding: 8px 10px 24px;
+  padding-left: 10px;
+  background: #fff;
+  height: 100vh;
+  overflow-y: auto !important;
+  list-style: none;
+  margin: 0;
+  margin-bottom: 0px;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE et Edge ancien */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, Edge */
+.sidebar-ui::-webkit-scrollbar {
+  display: none;
+}
+
+.form-control,
+.form-select{
+    min-height:48px;
+    border-radius:12px;
+}
+
+.modal-content{
+    background:#f8f9fc;
+}
+
+.form-control,
+.form-select{
+    min-height:42px;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.modal-content{
+    background:#f8f9fc;
+}
+
+.card{
+    box-shadow:none !important;
+}
+
+.btn-cancel{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    color:#475569;
+    transition:0.2s;
+}
+
+.btn-cancel:hover{
+    background:#eef2ff;
+    color:#1e293b;
+}
+
+.pc-container .pc-content {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 </style>
 </head>
