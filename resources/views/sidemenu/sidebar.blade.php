@@ -161,13 +161,13 @@ function isOpen($routes) {
           </a>
           <ul class="pc-submenu">
             <li class="pc-item {{ isActive('sites.*') }}">
-              <a href="#" class="pc-link">
+              <a href="{{ route('sites') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-building-factory"></i></span>
                 <span class="pc-mtext">Sites &amp; équipements</span>
               </a>
             </li>
             <li class="pc-item {{ isActive('incidents.*') }}">
-              <a href="#" class="pc-link">
+              <a href="{{ route('typeincidents') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-alert-triangle"></i></span>
                 <span class="pc-mtext">Types d'incidents</span>
               </a>

@@ -1,6 +1,47 @@
 <?php
 
 return [
+
+    'sites' => [
+        'title' => 'Sites',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Referentiels'],
+            ['label' => 'Sites & Equipements'],
+            ['label' => 'Sites'],
+           
+        ],
+    ],
+
+       'typeincidents' => [
+        'title' => 'Type d\'incidents',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Referentiels'],
+            ['label' => 'Type d\'incidents'],
+        ],
+    ],
+
+    'requetescm' => [
+        'title' => 'Requêtes CM',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Maintenance Corrective'],
+            ['label' => 'Sites'],
+           
+        ],
+    ],
+
+    'requetescm' => [
+        'title' => 'Requêtes CM',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Maintenance Corrective'],
+            ['label' => 'Maintenances'],
+            ['label' => 'Requêtes CM'],
+        
+        ],
+    ],
  
     'utilisateur' => [
         'title' => 'Creation utilisateurs',

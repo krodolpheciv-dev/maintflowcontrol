@@ -136,7 +136,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body pt-3">
+              <div class="card-body card-table pt-3">
                 <div class="table-responsive">
                   <table class="table table-hover" id="pc-dt-simple">
                   <thead class="bg-light-alt text-muted small text-uppercase">
@@ -282,7 +282,7 @@
                     <!-- SECTION INFORMATIONS -->
                     <div class="card border-0 bg-light rounded-4 mb-2">
 
-                        <div class="card-body p-3">
+                        <div class="card-body card p-3">
 
                             <h6 class="fw-semibold small mb-2">
 

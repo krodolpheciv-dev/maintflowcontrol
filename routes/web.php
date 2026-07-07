@@ -9,6 +9,8 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Divers\RequeteCmController;
+use App\Http\Controllers\Referentiels\SitesController;
+use App\Http\Controllers\Typeincidents\TypeincidentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,8 @@ Route::get('/demandecm', function () {
 
 
 Route::get('/requetescm', [RequeteCmController::class, 'index'])->name('requetescm');
+Route::get('/sites', [SitesController::class, 'index'])->name('sites');
+Route::get('/typeincidents', [TypeincidentsController::class, 'index'])->name('typeincidents');
 
 Route::get('/analytics', function () {
     return view('dashboard/analytics');
