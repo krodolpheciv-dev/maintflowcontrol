@@ -27,33 +27,11 @@
             <div class="input-wrapper">
                 <i class="fas fa-lock input-icon"></i>
                 <input type="password" id="password" name="password" placeholder="password" required>
-                <button type="button" id="togglePassword" class="toggle-password-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #a0b0c0; padding: 0; font-size: 16px;">
+                <button type="button" id="togglePassword" class="toggle-password-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #a0b0c0; padding: 0; font-size: 16px; transition: color 0.2s;">
                     <i class="fas fa-eye" id="eyeIcon"></i>
                 </button>
             </div>
             @error('password')
-                <div class="field-error">{{ $message }}</div>
-            @enderror
-        </div>
-
-        <div class="form-group">
-            <label for="project_id">Projet <span class="required">*</span></label>
-            <div class="input-wrapper">
-                <i class="fas fa-project-diagram input-icon"></i>
-                <select name="project_id" id="project_id" class="form-select" required
-                        style="width: 100%; padding: 12px 14px 12px 44px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 14px; color: #1a2a3a; background: #fafbfc; appearance: none; cursor: pointer;">
-                    <option value="" disabled {{ old('project_id') ? '' : 'selected' }}>Sélectionnez un projet</option>
-                    @foreach ($projets as $projet)
-                        <option value="{{ $projet->id }}" {{ old('project_id') == $projet->id ? 'selected' : '' }}>
-                            {{ $projet->nom_projet }}
-                        </option>
-                    @endforeach
-                </select>
-                <div style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #a0b0c0;">
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
-            @error('project_id')
                 <div class="field-error">{{ $message }}</div>
             @enderror
         </div>
@@ -63,6 +41,7 @@
             <label for="remember">Se souvenir de moi</label>
         </div>
 
+       
         <button type="submit" class="btn-primary" id="submitBtn">
             <span id="btnText">
                 <i class="fas fa-sign-in-alt me-2"></i>&nbsp;&nbsp;Se connecter
@@ -79,9 +58,15 @@
         <a href="{{ route('register') }}">Créer un compte</a>
     </div>
 
+    @push('styles')
+    <style>
+    </style>
+    @endpush
+
     @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Gestion de l'affichage du mot de passe
             const togglePassword = document.getElementById('togglePassword');
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eyeIcon');
@@ -89,7 +74,7 @@
             togglePassword.addEventListener('click', function() {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
-
+                
                 if (type === 'text') {
                     eyeIcon.classList.remove('fa-eye');
                     eyeIcon.classList.add('fa-eye-slash');
@@ -101,17 +86,39 @@
                 }
             });
 
+            // Désactivation automatique du mode texte après 30s
+            let timeout;
+            passwordInput.addEventListener('focus', function() {
+                clearTimeout(timeout);
+            });
+
+            passwordInput.addEventListener('blur', function() {
+                timeout = setTimeout(() => {
+                    if (this.getAttribute('type') === 'text') {
+                        this.setAttribute('type', 'password');
+                        eyeIcon.classList.remove('fa-eye-slash');
+                        eyeIcon.classList.add('fa-eye');
+                        togglePassword.style.color = '#a0b0c0';
+                    }
+                }, 30000);
+            });
+
+            // Gestion du spinner dans le bouton
             const loginForm = document.getElementById('loginForm');
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             const btnSpinner = document.getElementById('btnSpinner');
 
             loginForm.addEventListener('submit', function() {
+                // Cacher le texte, afficher le spinner
                 btnText.style.display = 'none';
                 btnSpinner.style.display = 'inline';
+                
+                // Désactiver le bouton
                 submitBtn.disabled = true;
             });
 
+            // Si erreur de validation, on remet le bouton normal 
             @if($errors->any())
                 btnText.style.display = 'inline';
                 btnSpinner.style.display = 'none';

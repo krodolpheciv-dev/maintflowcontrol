@@ -31090,3 +31090,33 @@ div.dataTables_wrapper div.dt-row {
 /**  =====================
   FIN 37. CSS SideBar redefinis
 ==========================  **/
+
+
+/* Couleurs violettes personnalisées */
+.bg-light-purple {
+    background-color: #f3e8ff !important;
+}
+
+.text-purple {
+    color: #7c3aed !important;
+}
+
+.border-purple {
+    border-color: #7c3aed !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.border-purple-subtle {
+    border-color: #c4b5fd !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.bg-purple {
+    background-color: #7c3aed !important;
+}
+
+.bg-purple-600 {
+    background-color: #9333ea !important;
+}

@@ -6,24 +6,12 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UserSeeder extends Seeder
+class PermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-
-     // 🔹 1. Vider le cache Spatie
+        // Vider le cache Spatie
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-
-        // 🔹 2. Supprimer toutes les permissions existantes
-        Permission::query()->delete();
-
-        // 🔹 3. Supprimer les rôles existants si tu veux repartir de zéro
-        Role::query()->delete();
 
         $permissions = [
             // Module Utilisateurs
@@ -31,20 +19,18 @@ class UserSeeder extends Seeder
             ['name' => 'creer utilisateurs', 'module' => 'utilisateurs'],
             ['name' => 'modifier utilisateurs', 'module' => 'utilisateurs'],
             ['name' => 'supprimer utilisateurs', 'module' => 'utilisateurs'],
-            
+
             // Module Rôles
             ['name' => 'visualiser roles', 'module' => 'roles'],
             ['name' => 'creer roles', 'module' => 'roles'],
             ['name' => 'modifier roles', 'module' => 'roles'],
             ['name' => 'supprimer roles', 'module' => 'roles'],
-            
+
             // Module Permissions
             ['name' => 'visualiser permissions', 'module' => 'permissions'],
             ['name' => 'creer permissions', 'module' => 'permissions'],
             ['name' => 'modifier permissions', 'module' => 'permissions'],
             ['name' => 'supprimer permissions', 'module' => 'permissions'],
-            
-            // Ajoute toutes tes permissions ici
         ];
 
         foreach ($permissions as $perm) {
@@ -54,11 +40,13 @@ class UserSeeder extends Seeder
             );
         }
 
-        // Optionnel : assigner au super-admin
+        // Rôle super-admin avec toutes les permissions
         $role = Role::firstOrCreate(['name' => 'super-admin', 'guard_name' => 'web']);
         $role->syncPermissions(Permission::all());
 
-         // 🔹 6. Vider le cache Spatie encore une fois après tout
+        // Rôle simple pour les utilisateurs standards
+        Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
+
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
     }
 }

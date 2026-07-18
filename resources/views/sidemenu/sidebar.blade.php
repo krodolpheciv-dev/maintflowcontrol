@@ -67,17 +67,17 @@ function isOpen($routes) {
             <li class="pc-item {{ isActive('demandes*') }}">
               <a href="{{ route('requetescm') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-file-text"></i></span>
-                <span class="pc-mtext">Requetes CM</span>
+                <span class="pc-mtext">Requête CM</span>
               </a>
             </li>
             <li class="pc-item {{ isActive('interventions*') }}">
-              <a href="#" class="pc-link">
+              <a href="{{ route('interventioncm') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-tool"></i></span>
                 <span class="pc-mtext">Interventions</span>
               </a>
             </li>
             <li class="pc-item {{ isActive('validation*') }}">
-              <a href="#" class="pc-link">
+              <a href="{{ route('validationscm') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-shield-check"></i></span>
                 <span class="pc-mtext">Validation</span>
               </a>

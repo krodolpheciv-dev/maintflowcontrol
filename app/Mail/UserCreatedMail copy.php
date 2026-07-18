@@ -11,25 +11,32 @@ class UserCreatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+
     public $user;
     public $token;
-    public $url;
 
     public function __construct($user, $token)
     {
+        //
+
         $this->user = $user;
         $this->token = $token;
-        
-        
-        $this->url = url('reset-password/' . $token . '?email=' . $user->email);
     }
 
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
-        return $this->subject('Activation de votre compte - ' . config('app.name'))
-                    ->view('emails.user_created')
-                    ->with([
-                        'url' => $this->url, 
-                    ]);
+        //return $this->view('view.name');
+        return $this->subject('Activation de votre compte')
+                    ->view('emails.user_created');
     }
 }
