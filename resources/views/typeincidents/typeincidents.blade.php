@@ -147,7 +147,7 @@ Types Incidents
 
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRequestModal">
                    <i class="ti ti-plus me-1"></i>
-                            Ajouter Type d'Incident
+                            Ajouter unType d'Incident
               </button>
                   </div>
                 </div>
@@ -274,6 +274,198 @@ class="badge bg-light-warning">
 Énergie
 
 </span>
+
+</td>
+
+<td>
+
+Défaut GE
+
+</td>
+
+<td>
+
+Groupe indisponible
+
+</td>
+
+<td>
+
+<span
+class="badge bg-light-success">
+
+Actif
+
+</span>
+
+</td>
+
+<td>
+
+26/05/2026
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<a>
+
+<i class="ti ti-edit"></i>
+
+</a>
+
+<a>
+
+<i class="ti ti-trash"></i>
+
+</a>
+
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                    <div class="col-12">
+            <div class="card table-card">
+              <div class="card-header">
+                <div class="d-sm-flex align-items-center justify-content-between">
+                  <div>
+                  <h5 class="mb-0 fw-bold">
+
+Sous-Types Incidents
+
+<span class="badge bg-light-primary ms-2">
+
+12
+
+</span>
+
+</h5>
+
+  <small class="text-muted">
+                    Retrouvez tous les sous-types d'incidents enregistrés
+                </small>
+</div>
+                  <div>
+
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRequestModal">
+                   <i class="ti ti-plus me-1"></i>
+                            Ajouter Un Sous-Type
+              </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body card-table pt-3">
+                <div>
+                 <table class="table align-middle" id="pc-dt-simple">
+
+<thead>
+
+<tr>
+
+<th>Code</th>
+
+<th>Sous-type</th>
+
+<th>Description</th>
+
+<th>Statut</th>
+
+<th>Créé le</th>
+
+<th class="text-end">
+
+Actions
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+<span class="site-code">
+
+INC001
+
+</span>
+
+</td>
+
+
+
+<td>
+
+Manque carburant
+
+</td>
+
+<td>
+
+Niveau carburant faible
+
+</td>
+
+<td>
+
+<span
+class="badge bg-light-success">
+
+Actif
+
+</span>
+
+</td>
+
+<td>
+
+26/05/2026
+
+</td>
+
+<td>
+
+<div class="actions">
+
+<a>
+
+<i class="ti ti-edit"></i>
+
+</a>
+
+<a>
+
+<i class="ti ti-trash"></i>
+
+</a>
+
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+INC002
 
 </td>
 
