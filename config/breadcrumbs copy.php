@@ -13,7 +13,7 @@ return [
         ],
     ],
 
-    'typeincidents' => [
+       'typeincidents' => [
         'title' => 'Type d\'incidents',
         'items' => [
             ['label' => 'Dashboard', 'route' => 'dashboard'],
@@ -27,31 +27,22 @@ return [
         'items' => [
             ['label' => 'Dashboard', 'route' => 'dashboard'],
             ['label' => 'Maintenance Corrective'],
-            ['label' => 'Requêtes cm'],
+            ['label' => 'Sites'],
            
         ],
     ],
 
-    // interventioncm
-    'interventioncm' => [
-        'title' => 'Liste des Interventions',
+    'requetescm' => [
+        'title' => 'Requêtes CM',
         'items' => [
             ['label' => 'Dashboard', 'route' => 'dashboard'],
             ['label' => 'Maintenance Corrective'],
-            ['label' => 'Interventions'],
+            ['label' => 'Maintenances'],
+            ['label' => 'Requêtes CM'],
+        
         ],
     ],
-
-    // interventioncm
-    'validationscm' => [
-        'title' => 'Validations Requêtes',
-        'items' => [
-            ['label' => 'Dashboard', 'route' => 'dashboard'],
-            ['label' => 'Maintenance Corrective'],
-            ['label' => 'Validations'],
-        ],
-    ],
-
+ 
     'utilisateur' => [
         'title' => 'Creation utilisateurs',
         'items' => [
@@ -61,8 +52,17 @@ return [
             ['label' => 'Créer utilisateurs'],
         ],
     ],
-
-    'finance' => [
+     'requetescm' => [
+        'title' => 'Requêtes CM',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Maintenance Corrective'],
+            ['label' => 'Maintenances'],
+            ['label' => 'Requêtes CM'],
+        
+        ],
+    ],
+  'finance' => [
         'title' => 'Finance',
         'items' => [
             ['label' => 'Accueil', 'route' => 'dashboard'],
@@ -70,12 +70,11 @@ return [
             ['label' => 'Finance'],
         ],
     ],
-
-    'analytics' => [
+     'analytics' => [
         'title' => 'Profils & permissions',
         'items' => [
             ['label' => 'Accueil', 'route' => 'dashboard'],
-            ['label' => 'Parametrage'],
+             ['label' => 'Parametrage'],
             ['label' => 'Profils & permissions'],
         ],
     ],
@@ -84,19 +83,21 @@ return [
         'title' => 'Creation Projet',
         'items' => [
             ['label' => 'Accueil', 'route' => 'dashboard'],
-            ['label' => 'Parametrage'],
+             ['label' => 'Parametrage'],
             ['label' => 'Autres Parametres'],
             ['label' => 'Creation Projet'],
         ],
     ],
 
-    'gestprofil' => [
+      'gestprofil' => [
         'title' => 'Profils & permissions',
-        'items' => [
+       'items' => [
             ['label' => 'Accueil', 'route' => 'dashboard'],
-            ['label' => 'Parametrage'],
+             ['label' => 'Parametrage'],
             ['label' => 'Profils & permissions'],
         ],
     ],
-
 ];
+
+
+?>
