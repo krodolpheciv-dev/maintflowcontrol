@@ -65,9 +65,9 @@ function isOpen($routes) {
           </a>
           <ul class="pc-submenu">
             <li class="pc-item {{ isActive('demandes*') }}">
-              <a href="{{ route('requetescm') }}" class="pc-link">
+              <a href="{{ route('lesrequetescm') }}" class="pc-link">
                 <span class="pc-sicon"><i class="ti ti-file-text"></i></span>
-                <span class="pc-mtext">Requête CM</span>
+                <span class="pc-mtext">Requêtes CM</span>
               </a>
             </li>
             <li class="pc-item {{ isActive('interventions*') }}">

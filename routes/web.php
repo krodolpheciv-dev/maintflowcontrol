@@ -6,13 +6,15 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Typeincidents\TypeincidentsController;
+use App\Http\Controllers\Typeincidents\SubtypeIncidentsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\ProjectSelectionController;
 use App\Http\Controllers\Divers\RequeteCmController;
+use App\Http\Controllers\RequeteCm\RequetesCmController;
 use App\Http\Controllers\Referentiels\SitesController;
-use App\Http\Controllers\Typeincidents\TypeincidentsController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -124,3 +126,64 @@ Route::middleware('auth')->group(function () {
 
     });
 });
+
+    /*
+    |----------------------------------------------------------------------
+    | Routes pour la gestion des types d'incidents
+    |----------------------------------------------------------------------
+    */
+Route::get('/incident-types/data',[TypeincidentsController::class,'getData'])
+        ->name('incident-types.data');
+Route::post('/incident-types', [TypeincidentsController::class, 'store'])
+        ->name('incident-types.store');
+Route::get('/incident-typeshow/{id}', [TypeincidentsController::class, 'show'])->name('incident-types.show');
+Route::get('/updateincident-types/{id}', [TypeincidentsController::class, 'update'])->name('incident-types.update');
+
+Route::get('/updatetypeincidents/', [TypeincidentsController::class, 'updatesecond'])->name('incidentypes.update');
+
+
+Route::get('/incident-types/{id}', [TypeincidentsController::class, 'destroy'])->name('incident-types.destroy');
+Route::get('/incident-typesaffiche/', [TypeincidentsController::class, 'afficherliste'])
+    ->name('incident-types.list');
+Route::get('/updateincident-types/status/{id}', [TypeincidentsController::class, 'updateStatus'])
+    ->name('incident-types.status');
+
+    /*
+    |----------------------------------------------------------------------
+    | Routes pour la gestion des sous types d'incidents
+    |----------------------------------------------------------------------
+    */
+
+Route::get('/incident-soustypes/data',[SubtypeIncidentsController::class,'getData'])->name('incident-soustypes.data');
+Route::get('/incident-soustypes/{id}', [SubtypeIncidentsController::class, 'show'])->name('incident-soustypes.show');
+Route::get('/updateincident-soustypes/{id}', [SubtypeIncidentsController::class, 'update'])->name('incident-soustypes.update');
+Route::post('/incident-soustypesincident', [SubtypeIncidentsController::class, 'store'])->name('incident-sub-types.store');
+Route::get('/supprimerincident-soustypes/{id}', [SubtypeIncidentsController::class, 'destroy'])->name('incident-soustypes.destroy');
+Route::get('/updateincident-soustypes/status/{id}', [SubtypeIncidentsController::class, 'updateStatus'])->name('incident-soustypes.status')
+;
+
+Route::get('/incident-soustypeslist/by-type/{id}', [SubtypeIncidentsController::class, 'getByType']);
+
+
+    /*
+    |----------------------------------------------------------------------
+    | Routes pour la gestion des requetescm
+    |----------------------------------------------------------------------
+    */
+Route::get('/lesrequetescm/',[RequetesCmController::class,'index'])->name('lesrequetescm');
+
+/*
+    |----------------------------------------------------------------------
+    | Routes pour la gestion des sites
+    |----------------------------------------------------------------------
+    */
+
+//Route::get('/sites/{id}', [SitesController::class, 'show'])->name('sites.show');
+Route::get('/siteslist/by-project/{id}', [SitesController::class, 'getListesitesparid'])->name('sites.list.by-project');
+
+Route::get('/datatable', [RequetesCmController::class,'datatablethird'])->name('cm.datatable');
+Route::post('/cm-requests/store', [RequetesCmController::class, 'store'])->name('cm_requests.store');
+
+Route::get('/cm-requests/{id}', [RequetesCmController::class, 'show'])->name('cm.show');
+
+

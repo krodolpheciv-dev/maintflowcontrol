@@ -131,9 +131,11 @@
 
 Types Incidents
 
-<span class="badge bg-light-primary ms-2">
+<span class="badge bg-light-primary ms-2" id="labelnmbretypeincid">
 
-12
+@if(isset($totalTypesIncident))
+{{$totalTypesIncident}}
+@endif
 
 </span>
 
@@ -145,26 +147,23 @@ Types Incidents
 </div>
                   <div>
 
-              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRequestModal">
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddIncidentType">
                    <i class="ti ti-plus me-1"></i>
-                            Ajouter unType d'Incident
+                            Ajouter un Type d'Incident
               </button>
                   </div>
                 </div>
               </div>
               <div class="card-body card-table pt-3">
                 <div>
-                 <table class="table align-middle" id="pc-dt-simple">
+                 <table class="table align-middle" id="pc-dt-simpletypeincidents">
 
 <thead>
 
 <tr>
 
-<th>Code</th>
 
 <th>Type incident</th>
-
-<th>Sous-type</th>
 
 <th>Description</th>
 
@@ -184,17 +183,8 @@ Actions
 
 <tbody>
 
-<tr>
+<!--<tr>
 
-<td>
-
-<span class="site-code">
-
-INC001
-
-</span>
-
-</td>
 
 <td>
 
@@ -206,13 +196,6 @@ class="badge bg-light-warning text-warning">
 </span>
 
 </td>
-
-<td>
-
-Manque carburant
-
-</td>
-
 <td>
 
 Niveau carburant faible
@@ -260,11 +243,6 @@ Actif
 
 <tr>
 
-<td>
-
-INC002
-
-</td>
 
 <td>
 
@@ -274,12 +252,6 @@ class="badge bg-light-warning">
 Énergie
 
 </span>
-
-</td>
-
-<td>
-
-Défaut GE
 
 </td>
 
@@ -326,7 +298,7 @@ Actif
 
 </td>
 
-</tr>
+</tr> -->
 
 </tbody>
 
@@ -345,10 +317,11 @@ Actif
 
 Sous-Types Incidents
 
-<span class="badge bg-light-primary ms-2">
+<span class="badge bg-light-primary ms-2" id="labelnmbresoustypeincid">
 
-12
-
+@if(isset($totalSousTypesIncident))
+{{$totalSousTypesIncident}}
+@endif
 </span>
 
 </h5>
@@ -359,7 +332,7 @@ Sous-Types Incidents
 </div>
                   <div>
 
-              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRequestModal">
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddIncidentsousType">
                    <i class="ti ti-plus me-1"></i>
                             Ajouter Un Sous-Type
               </button>
@@ -368,13 +341,13 @@ Sous-Types Incidents
               </div>
               <div class="card-body card-table pt-3">
                 <div>
-                 <table class="table align-middle" id="pc-dt-simple">
+                 <table class="table align-middle" id="pc-dt-simplesoustypeincident">
 
 <thead>
 
 <tr>
 
-<th>Code</th>
+<th>Type Incident</th>
 
 <th>Sous-type</th>
 
@@ -396,130 +369,6 @@ Actions
 
 <tbody>
 
-<tr>
-
-<td>
-
-<span class="site-code">
-
-INC001
-
-</span>
-
-</td>
-
-
-
-<td>
-
-Manque carburant
-
-</td>
-
-<td>
-
-Niveau carburant faible
-
-</td>
-
-<td>
-
-<span
-class="badge bg-light-success">
-
-Actif
-
-</span>
-
-</td>
-
-<td>
-
-26/05/2026
-
-</td>
-
-<td>
-
-<div class="actions">
-
-<a>
-
-<i class="ti ti-edit"></i>
-
-</a>
-
-<a>
-
-<i class="ti ti-trash"></i>
-
-</a>
-
-</div>
-
-</td>
-
-</tr>
-
-<tr>
-
-<td>
-
-INC002
-
-</td>
-
-<td>
-
-Défaut GE
-
-</td>
-
-<td>
-
-Groupe indisponible
-
-</td>
-
-<td>
-
-<span
-class="badge bg-light-success">
-
-Actif
-
-</span>
-
-</td>
-
-<td>
-
-26/05/2026
-
-</td>
-
-<td>
-
-<div class="actions">
-
-<a>
-
-<i class="ti ti-edit"></i>
-
-</a>
-
-<a>
-
-<i class="ti ti-trash"></i>
-
-</a>
-
-</div>
-
-</td>
-
-</tr>
-
 </tbody>
 
 </table>
@@ -529,6 +378,300 @@ Actif
           </div>
         </div>
         <!-- [ Main Content ] end -->
+
+<!-- ==========================================
+     MODAL AJOUTER SOUS TYPE
+=========================================== -->
+<div class="modal fade"
+     id="modalAddIncidentsousType"
+     tabindex="-1"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content border-0 rounded-4 shadow">
+
+            <!-- Header -->
+            <div class="modal-header border-0 pb-2">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+
+                        <i class="ti ti-alert-triangle text-warning fs-3"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="mb-1 fw-bold" id="h4soustype">
+                            Ajouter un sous-type d'incident
+                        </h4>
+
+                        <small class="text-muted">
+                            Créer une nouvelle catégorie d'incident
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <button class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+              <form id="formIncidentsousType">
+            <!-- Body -->
+            <div class="modal-body pt-2">
+
+              
+
+                <input type="hidden" id="soustype_incident_id" name="soustype_incident_id">
+                    <div class="row g-3">
+
+                        <!-- Nom -->
+                        <div class="col-md-12">
+
+                            <label class="form-label fw-semibold">
+                               Selectionner un type incident <span class="text-danger">*</span>
+                            </label>
+
+                            <select class="form-select" name="subtype_incident" id="subtype_incident" required>
+                            </select>
+
+                        </div>
+
+                       <!-- Nom -->
+                        <div class="col-md-12">
+
+                            <label class="form-label fw-semibold">
+                                Sous-type <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control" name="sous_type" id="sous_type"
+                                placeholder="Ex : Energie" required >
+
+                        </div>  
+                        <!-- Description -->
+                        <div class="col-12">
+
+                            <label class="form-label fw-semibold">
+                                Description
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="description" id="description"
+                                placeholder="Décrire le sous-type d'incident..."></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Aperçu -->
+                   
+
+              
+
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0">
+
+                <button
+                type="button"
+                    class="btn btn-light px-4"
+                    data-bs-dismiss="modal" style="background-color: #d3d4d5;
+  color: white;" >
+
+                    <i class="ti ti-x me-1"></i>
+
+                    Annuler
+
+                </button>
+
+                <button type="submit"
+                  id="btnSaveIncidentsousType"
+                    class="btn btn-primary px-4">
+
+                    <i class="ti ti-device-floppy me-1"></i>
+
+                    Enregistrer
+
+                </button>
+
+            </div>
+  </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     MODAL AJOUTER TYPE INCIDENT
+=========================================== -->
+<div class="modal fade"
+     id="modalAddIncidentType"
+     tabindex="-1"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content border-0 rounded-4 shadow">
+
+            <!-- Header -->
+            <div class="modal-header border-0 pb-2">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+
+                        <i class="ti ti-alert-triangle text-warning fs-3"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4 class="mb-1 fw-bold">
+                            Ajouter un type d'incident
+                        </h4>
+
+                        <small class="text-muted">
+                            Créer une nouvelle catégorie d'incident
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <button class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+ <form id="formIncidentType" >
+            <!-- Body -->
+            <div class="modal-body pt-2">
+
+               
+<input type="hidden" id="incident_id" name="incident_id">
+                    <div class="row g-3">
+
+                        <!-- Nom -->
+                        <div class="col-md-12">
+
+                            <label class="form-label fw-semibold">
+                                Nom du type <span class="text-danger">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="type_incident" id="type_incident"
+                                class="form-control"
+                                placeholder="Ex : Energie" required >
+
+                        </div>
+
+                   
+
+                     
+
+                  
+
+                     
+
+                        <!-- Priorité -->
+                      
+
+                        <!-- Description -->
+                        <div class="col-12">
+
+                            <label class="form-label fw-semibold">
+                                Description
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="description" id="description"
+                                placeholder="Décrire le type d'incident..."></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Aperçu -->
+                    <div class="card bg-light border-0 rounded-4 mt-4" style='display:none;'>
+
+                        <div class="card-body">
+
+                            <small class="text-muted d-block mb-2">
+
+                                Aperçu
+
+                            </small>
+
+                            <span class="badge bg-warning fs-6 px-3 py-2">
+
+                                <i class="ti ti-bolt me-2"></i>
+
+                                Energie
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+               
+
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0">
+
+                <button
+                    class="btn btn-light px-4"
+                    data-bs-dismiss="modal" style="background-color: #d3d4d5;
+  color: white;" >
+
+                    <i class="ti ti-x me-1"></i>
+
+                    Annuler
+
+                </button>
+
+                <button
+                   type="submit"
+                id="btnSaveIncidentType"
+                    class="btn btn-primary px-4">
+
+                    <i class="ti ti-device-floppy me-1"></i>
+
+                    Enregistrer
+
+                </button>
+
+            </div>
+ </form>
+        </div>
+
+    </div>
+
+</div>
+
+
+
 
 <!-- Modal Ajouter Requête -->
 <div class="modal fade" id="addRequestModal"   tabindex="-1"
@@ -957,7 +1100,7 @@ rows="2">
 
                 </button>
 
-                <button type="button"
+                <button type="submit"
                         class="btn btn-primary rounded-pill px-4">
 
                     <i class="ti ti-device-floppy me-1"></i>
@@ -1041,7 +1184,7 @@ const sousTypes = {
     ]
 };
 
-document.getElementById('type_incident')
+/*document.getElementById('type_incident')
 .addEventListener('change', function () {
 
     let type = this.value;
@@ -1065,7 +1208,7 @@ document.getElementById('type_incident')
 
     }
 
-});
+});*/
 </script>
 <script>
   layout_change('light');
@@ -1093,8 +1236,653 @@ document.getElementById('type_incident')
 
 
 <script>
+  $(function () {
+
+  $.ajaxSetup({
+
+        headers:{
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+
+    });
+
+});
+
+ var table;
+
+     /*
+    |----------------------------------------------------------------------
+    | Routes pour la gestion des types d'incidents
+    |----------------------------------------------------------------------
+    */
+  $(function () {
+
+
+
+   table =$('#pc-dt-simpletypeincidents').DataTable({
+
+        processing: true,
+
+        serverSide: true,
+
+        ajax: "{{ route('incident-types.data') }}",
+
+        columns: [
+
+            {
+                data: 'libelletypeincident',
+                name: 'libelletypeincident'
+            },
+
+            {
+                data: 'description',
+                name: 'description'
+            },
+
+            {
+                data: 'status',
+                name: 'status'
+            },
+
+            {
+                data: 'created_at',
+                name: 'created_at'
+            },
+
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable:false,
+                searchable:false,
+                className:'text-end'
+            }
+
+        ],
+
+        language:{
+            url:"//cdn.datatables.net/plug-ins/1.13.7/i18n/fr-FR.json"
+        }
+
+    });
+
+
+
+    $(document).on('click','.editType',function(){
+
+     let row = table.row($(this).closest('tr')).data();
+
+      console.log(row.id);
+    console.log(row.libelletypeincident);
+
+    var id=row.id;
+
+    $.get('/incident-typeshow/' + id, function (data) {
+
+        // Remplir le formulaire
+        $('#incident_id').val(data.id);
+        $('#type_incident').val(data.libelletypeincident);
+        $('#description').val(data.description);
+
+        // Modifier le titre
+        $('.modal-header h4').text("Modifier un type d'incident");
+        $('.modal-header small').text("Modifier cette catégorie d'incident");
+
+        // Modifier le texte du bouton
+        $('#btnSaveIncidentType').html(
+            '<i class="ti ti-device-floppy me-1"></i> Modifier'
+        );
+
+        // Ouvrir le même modal
+        $('#modalAddIncidentType').modal('show');
+
+    });
+
+    //let id=$(this).data('id');
+
+    // ouvrir le modal de modification
+
+});
+
+$(document).on('click','.deleteType',function(){
+
+ let row = table.row($(this).closest('tr')).data();
+
+      console.log(row.id);
+    console.log(row.libelletypeincident);
+    var id=row.id;
+
+     let info = table.page.info();
+
+          console.log(info.recordsTotal);
+
+        //  alert(info.recordsTotal);
+
+    if(confirm("Voulez-vous supprimer ce type d'incident ?")){
+
+        $.ajax({
+
+            url:'/incident-types/'+id,
+
+            type:'GET',
+
+            success:function(response){
+
+           // let info = table.page.info();
+
+         // console.log(info.recordsTotal);
+
+         // $("#labelnmbretypeincid").html(info.recordsTotal);
+
+                table.ajax.reload(function(){
+
+        let info = table.page.info();
+
+        $("#labelnmbretypeincid").html(info.recordsTotal);
+
+        chargerTypesIncident();
+
+    },false);
+
+                alert(response.message);
+
+            }
+
+        });
+
+    }
+
+   // let id=$(this).data('id');
+
+    // suppression AJAX
+
+});
+
+
+
+
+});
+
+$(document).on('click', '.changeStatusType', function () {
+
+    let row = table.row($(this).closest('tr')).data();
+
+    $.ajax({
+
+        url: '/updateincident-types/status/' + row.id,
+        type: 'GET',
+
+        success: function (response) {
+
+            table.ajax.reload(function(){
+
+        let info = table.page.info();
+
+
+        $("#labelnmbretypeincid").html(info.recordsTotal);
+
+       // chargerTypesIncident();
+
+    }, false);
+
+            alert(response.message);
+
+        },
+
+        error: function () {
+
+            alert("Erreur lors de la modification du statut.");
+
+        }
+
+    });
+
+});
+
+$('#formIncidentType').submit(function(e){
+
+    e.preventDefault();
+
+
+     var id=$('#incident_id').val();
+
+     //alert(id);
+
+     if(id){
+
+      
+
+    $.ajax({
+
+        url:'/updateincident-types/'+id,
+
+        type:'GET',
+
+        data:$(this).serialize(),
+
+        success:function(response){
+
+          $('#formIncidentType')[0].reset();
+
+          
+        $('#incident_id').val("");
+     
+
+        // Modifier le titre
+        $('.modal-header h4').text("Ajouter un type d'incident");
+        $('.modal-header small').text("Créer une nouvelle catégorie d'incident");
+
+        // Modifier le texte du bouton
+        $('#btnSaveIncidentType').html(
+            '<i class="ti ti-device-floppy me-1"></i> Enregistrer'
+        );
+        
+
+            $('#modalAddIncidentType').modal('hide');
+
+            table.ajax.reload(function(){
+
+        let info = table.page.info();
+
+
+        $("#labelnmbretypeincid").html(info.recordsTotal);
+
+        chargerTypesIncident();
+
+    },false);
+
+            alert(response.message);
+
+        },
+
+        error:function(xhr){
+
+            console.log(xhr.responseJSON);
+
+        }
+
+    });
+}
+else{
+
+    $.ajax({
+
+        url: "{{ route('incident-types.store') }}",
+
+        type: "POST",
+
+        data: $(this).serialize(),
+
+        success:function(response){
+
+            // Fermer le modal
+           // $('#modalAddIncidentType').modal('hide');
+
+            // Vider le formulaire
+            $('#formIncidentType')[0].reset();
+
+            // Rafraîchir uniquement le DataTable
+            table.ajax.reload(function(){
+
+        let info = table.page.info();
+
+        $("#labelnmbretypeincid").html(info.recordsTotal);
+        chargerTypesIncident();
+
+    },false);
+
+            alert(response.message);
+            /*Swal.fire({
+                icon:'success',
+                title:'Succès',
+                text:response.message,
+                timer:2000,
+                showConfirmButton:false
+            });*/
+
+        },
+
+        error:function(xhr){
+
+            console.log(xhr.responseJSON);
+
+        }
+
+    });
+
+}
+
+});
+
+
+
+
+    /*
+    |----------------------------------------------------------------------
+    | Routes pour la gestion des sous types d'incidents
+    |----------------------------------------------------------------------
+    */
+
+
+var  tablesub;
+    $(function () {
+
+chargerTypesIncident();
+
+   tablesub =$('#pc-dt-simplesoustypeincident').DataTable({
+
+        processing: true,
+
+        serverSide: true,
+
+        ajax: "{{ route('incident-soustypes.data') }}",
+
+        columns: [
+
+            {
+                data: 'libelletypeincident',
+                name: 'libelletypeincident'
+            },
+
+            {
+                data: 'libellesoustype',
+                name: 'libellesoustype'
+            },
+
+            {
+                data: 'description',
+                name: 'description'
+            },
+
+            {
+                data: 'status',
+                name: 'status'
+            },
+
+            {
+                data: 'created_at',
+                name: 'created_at'
+            },
+
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable:false,
+                searchable:false,
+                className:'text-end'
+            }
+
+        ],
+
+        language:{
+            url:"//cdn.datatables.net/plug-ins/1.13.7/i18n/fr-FR.json"
+        }
+
+    });
+
+
+
+
+    $(document).on('click','.deleteTypesub',function(){
+
+    
+
+ let row =  tablesub.row($(this).closest('tr')).data();
+
+      console.log(row.id);
+    console.log(row.libelletypeincident);
+    var id=row.id;
+
+    if(confirm("Voulez-vous supprimer ce sous-type d'incident ?")){
+
+
+    $.ajax({
+
+            url: '/supprimerincident-soustypes/' + id,
+
+            type: 'GET',
+
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            success: function (response) {
+
+                tablesub.ajax.reload(function () {
+
+                    let info = tablesub.page.info();
+
+                    $("#labelnmbresoustypeincid").html(info.recordsTotal);
+
+                }, false);
+
+                alert(response.message);
+
+            },
+
+            error: function (xhr) {
+
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    alert(xhr.responseJSON.message);
+                } else {
+                    alert("Une erreur est survenue.");
+                }
+
+            }
+
+        });
+
+
+       /* $.ajax({
+
+            url:'/incident-types/'+id,
+
+            type:'GET',
+
+            success:function(response){
+
+                 tablesub.ajax.reload(null,false);
+
+                alert(response.message);
+
+            }
+
+        });*/
+
+    }
+
+   // let id=$(this).data('id');
+
+    // suppression AJAX
+
+});
+
+$(document).on('click','.changeStatusTypesub',function(){
+
+ let row = tablesub.row($(this).closest('tr')).data();
+
+      console.log(row.id);
+    console.log(row.libelletypeincident);
+
+    var id=row.id;
+
+     $.ajax({
+
+        url: '/updateincident-soustypes/status/' +id,
+        type: 'GET',
+
+        success: function (response) {
+
+            tablesub.ajax.reload(function () {
+
+                    let info = tablesub.page.info();
+
+                    $("#labelnmbresoustypeincid").html(info.recordsTotal);
+
+                }, false);
+
+            alert(response.message);
+
+        },
+
+        error: function (xhr) {
+
+            alert("Erreur lors de la modification du statut.");
+
+        }
+
+    });
+
+
+});
+
+
+    $(document).on('click','.editTypesub',function(){
+
+     let row = tablesub.row($(this).closest('tr')).data();
+
+      console.log(row.id);
+    console.log(row.libelletypeincident);
+
+    var id=row.id;
+
+    $.get('/incident-soustypes/' + id, function (data) {
+
+        // Remplir le formulaire
+        $('#soustype_incident_id').val(data.id);
+       // $('#type_incident').val(data.libelletypeincident);
+        $('#description').val(data.description);
+        $('#sous_type').val(data.libellesoustype);
+        $('#subtype_incident').val(data.incident_type_id);
+
+        // Modifier le titre
+        //$('.modal-header h4').text("Modifier un type d'incident");
+        $('.modal-header #h4soustype').text("Modifier un sous-type d'incident");
+        $('.modal-header small').text("Modifier ce sous-type d'incident");
+
+        // Modifier le texte du bouton
+        $('#btnSaveIncidentsousType').html(
+            '<i class="ti ti-device-floppy me-1"></i> Modifier'
+        );
+
+        // Ouvrir le même modal
+        $('#modalAddIncidentsousType').modal('show');
+
+    });
+
+    //let id=$(this).data('id');
+
+    // ouvrir le modal de modification
+
+});
+
+$('#formIncidentsousType').submit(function(e){
+
+    e.preventDefault();
+
+
+     var id=$('#soustype_incident_id').val();
+
+     //alert(id);
+
+
+     if(id){
+        
+
+//alert(id);
+
+  // Modification
+        $.ajax({
+
+            url:'/updateincident-soustypes/'+id,
+
+            type:'GET',
+
+            data:$(this).serialize(),
+
+            success:function(response){
+
+             $('#soustype_incident_id').val("");
+
+              $('#formIncidentsousType')[0].reset();
+     
+
+        // Modifier le titre
+
+        $('.modal-header #h4soustype').text("Ajouter un sous-type d'incident");
+        $('.modal-header small').text("Créer une nouvelle catégorie d'incident");
+
+
+
+        // Modifier le texte du bouton
+        $('#btnSaveIncidentsousType').html('<i class="ti ti-device-floppy me-1"></i>Enregistrer');
+
+                $('#modalAddIncidentsousType').modal('hide');
+
+    tablesub.ajax.reload( function(){
+                       let info = tablesub.page.info();
+                       $("#labelnmbresoustypeincid").html(info.recordsTotal);
+                             }, false);
+
+                alert(response.message);
+
+            },
+
+            error:function(xhr){
+
+                alert(xhr.responseJSON.message);
+
+            }
+
+        });
+
+     }
+     else{
+
+       $.ajax({
+
+        url: "{{ route('incident-sub-types.store') }}",
+        type: "POST",
+        data: $(this).serialize(),
+
+        success: function(response){
+
+            $('#formIncidentsousType')[0].reset();
+
+            tablesub.ajax.reload(function(){
+
+        let info = tablesub.page.info();
+
+        $("#labelnmbresoustypeincid").html(info.recordsTotal);
+}
+        , false);
+
+           // $('#modalAddIncidentsousType').modal('hide');
+
+            alert(response.message);
+
+        },
+
+        error: function(xhr){
+
+            if(xhr.status === 422){
+                alert(xhr.responseJSON.message);
+            }
+
+        }
+
+    });
+
+}
+
+
+
+});
+
+});
 
 $(document).ready(function () {
+
+chargerTypesIncident();
 
 var table = $('#incidentTable').DataTable({
 
@@ -1165,7 +1953,31 @@ tr.addClass('shown');
 });
 
 </script>
+<script>
+function chargerTypesIncident() {
 
+    $.get("{{ route('incident-types.list') }}", function(data) {
+
+        let select = $('#subtype_incident');
+
+        select.empty();
+
+        select.append('<option value="">Sélectionner</option>');
+
+        $.each(data, function(index, item) {
+
+            select.append(
+                `<option value="${item.id}">
+                    ${item.libelletypeincident}
+                </option>`
+            );
+
+        });
+
+    });
+
+}
+</script>
 
 
    

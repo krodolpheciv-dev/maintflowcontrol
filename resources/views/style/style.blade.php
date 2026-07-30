@@ -13,7 +13,7 @@
       content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard"
     />
     <meta name="author" content="Phoenixcoded" />
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- [Favicon] icon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon" />
  <!-- [Font] Family -->
@@ -986,6 +986,85 @@ overflow-y:auto;
 
 --bs-gutter-y:.8rem;
 
+}
+
+/*#addRequestModal .modal-body, #viewCmRequestModal .modal-body{*/
+#addRequestModal .modal-body{
+    overflow-y: visible !important;
+    max-height: none !important;
+}
+
+#viewCmRequestModal .modal-dialog{
+    max-width: 1250px;
+}
+
+#viewCmRequestModal .modal-content{
+    height: 92vh;
+}
+
+#viewCmRequestModal .modal-body{
+    overflow: hidden;
+}
+
+#viewCmRequestModal .card{
+  /*  height: 100%;*/
+}
+
+.modal-loading{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    backdrop-filter:blur(2px);
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #edf2f7;
+}
+
+.info-row label{
+    color:#6c757d;
+    font-weight:600;
+    margin:0;
+}
+
+.info-row div{
+    font-weight:600;
+    color:#212529;
+    text-align:right;
+}
+
+.description-box{
+    min-height:180px;
+    background:#f8f9fa;
+    border-radius:8px;
+    padding:20px;
+    line-height:1.8;
+}
+
+.card{
+    border-radius:12px;
+}
+
+.modal-header{
+    padding:20px 25px;
+}
+
+.modal-footer{
+    padding:15px 25px;
+}
+
+.card{
+    height:auto;
 }
 </style>
 </head>

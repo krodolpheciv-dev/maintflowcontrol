@@ -31,6 +31,15 @@ return [
            
         ],
     ],
+    'lesrequetescm' => [
+        'title' => 'Requêtes CM',
+        'items' => [
+            ['label' => 'Dashboard', 'route' => 'dashboard'],
+            ['label' => 'Maintenance Corrective'],
+            ['label' => 'Requêtes cm'],
+           
+        ],
+    ],
 
     // interventioncm
     'interventioncm' => [
