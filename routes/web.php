@@ -186,4 +186,6 @@ Route::post('/cm-requests/store', [RequetesCmController::class, 'store'])->name(
 
 Route::get('/cm-requests/{id}', [RequetesCmController::class, 'show'])->name('cm.show');
 
+Route::get('/cm-requestss/{id}', [RequetesCmController::class, 'show'])->name('cms.show');
+
 
