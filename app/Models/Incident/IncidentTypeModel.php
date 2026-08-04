@@ -4,13 +4,14 @@ namespace App\Models\Incident;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class IncidentTypeModel extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
     protected $table = 'incident_types';
-    protected $primaryKey ='id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'libelletypeincident',
@@ -28,7 +29,7 @@ class IncidentTypeModel extends Model
      */
     public function subTypes()
     {
-        return $this->hasMany(IncidentSubType::class, 'incident_type_id');
+        return $this->hasMany(IncidentSubTypeModel::class, 'incident_type_id');
     }
 
     /**
@@ -37,5 +38,13 @@ class IncidentTypeModel extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * Scope pour les types actifs
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
     }
 }

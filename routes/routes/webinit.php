@@ -41,14 +41,6 @@ Route::get('/demandecm', function () {
     return view('forms/requetescm');
 })->name('demandecm');
 
-Route::get('/interventioncm', function () {
-    return view('forms/interventioncm');
-})->name('interventioncm');
-
-Route::get('/validationscm', function () {
-    return view('forms/validationscm');
-})->name('validationscm');
-
 
 Route::get('/requetescm', [RequeteCmController::class, 'index'])->name('requetescm');
 Route::get('/sites', [SitesController::class, 'index'])->name('sites');

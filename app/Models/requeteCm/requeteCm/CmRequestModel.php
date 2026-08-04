@@ -3,7 +3,6 @@
 namespace App\Models\requeteCm;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\requeteCm\CmRequestValidationModel;
 use App\Models\Incident\IncidentSubTypeModel;
 use App\Models\Incident\IncidentTypeModel;
 use App\Models\Project;
@@ -132,22 +131,5 @@ class CmRequestModel extends Model
             User::class,
             'assigned_to'
         );
-    }
-
-
-    public function validations()
-    {
-        return $this->hasMany(
-            CmRequestValidationModel::class,
-            'cm_request_id'
-        )->latest('created_at');
-    }
-
-    public function latestValidation()
-    {
-        return $this->hasOne(
-            CmRequestValidationModel::class,
-            'cm_request_id'
-        )->latestOfMany('created_at');
     }
 }

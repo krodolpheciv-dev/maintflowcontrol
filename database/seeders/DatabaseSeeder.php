@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,    
             AdminUserSeeder::class, 
             SiteSeeder::class,  
+            IncidentTypesSeeder::class,
+           
         ]);
     }
 }

@@ -117,7 +117,7 @@
               </div>
               <div class="card-body card-table pt-3">
                 <div class="table-responsive">
-                  <table class="table table-hover" id="pc-dt-simple">
+                  <!--<table class="table table-hover" id="pc-dt-simple">
                   <thead class="bg-light-alt text-muted small text-uppercase">
                                     <tr>
                                         <th class="ps-4">N° Demande</th>
@@ -156,7 +156,6 @@
                                             <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                 <i class="ti ti-edit f-20"></i>
                                             </a>
-                                            <!-- Bouton Intervenir DESACTIVE (statut En cours) -->
                                             <a href="#" 
                                                class="avtar avtar-xs btn-link-secondary intervene-btn disabled" 
                                                style="opacity: 0.4; pointer-events: none; cursor: not-allowed;"
@@ -198,7 +197,6 @@
                                             <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                 <i class="ti ti-edit f-20"></i>
                                             </a>
-                                            <!-- Bouton Intervenir ACTIF (statut Validée) -->
                                             <a href="#" 
                                                class="avtar avtar-xs btn-link-success intervene-btn" 
                                                data-bs-toggle="modal" 
@@ -239,7 +237,6 @@
                                             <a href="#" class="avtar avtar-xs btn-link-secondary">
                                                 <i class="ti ti-edit f-20"></i>
                                             </a>
-                                            <!-- Bouton Intervenir DESACTIVE (statut En attente) -->
                                             <a href="#" 
                                                class="avtar avtar-xs btn-link-secondary intervene-btn disabled" 
                                                style="opacity: 0.4; pointer-events: none; cursor: not-allowed;"
@@ -258,7 +255,26 @@
                                     </tr>
 
                                 </tbody>
-                  </table>
+                  </table> -->
+
+                  <table class="table table-hover" id="tablerequetecm" width="100%">
+    <thead class="bg-light-alt text-muted small text-uppercase">
+        <tr>
+            <th></th>
+            <th>N° Demande</th>
+            <th>Site</th>
+            <th>Incident</th>
+            <th>Assigné à</th>
+            <th>Urgence</th>
+            <th>Statut</th>
+            <th>Créé le</th>
+            <th class="text-end">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+
+</table>
                 </div>
               </div>
             </div>
@@ -266,6 +282,7 @@
         </div>
         <!-- [ Main Content ] end -->
 
+<!-- Modal Ajouter Requête -->
 <!-- Modal Ajouter Requête -->
 <div class="modal fade" id="addRequestModal"   tabindex="-1"
      data-bs-backdrop="static"
@@ -291,7 +308,7 @@
                         </h5>
 
                         <small class="text-muted">
-                            Création d'une demande corrective
+                            Création d'une Requete corrective
                         </small>
                     </div>
 
@@ -306,8 +323,14 @@
 
             <!-- BODY -->
             <div class="modal-body px-3 py-2">
-
-                <form>
+<div id="modalLoading" class="modal-loading d-none">
+    <div class="text-center">
+        <div class="spinner-border text-primary mb-3"></div>
+        <h6>Création de la requête...</h6>
+        <small>Veuillez patienter</small>
+    </div>
+</div>
+                <form id="cmRequestForm" enctype="multipart/form-data">
 
                     <!-- SECTION INFORMATIONS -->
                     <div class="card border-0 bg-light rounded-4 mb-2">
@@ -323,37 +346,32 @@
                             </h6>
 
                             <div class="row g-2">
-
-                                <!-- Ticket -->
-                                <div class="col-md-6">
+     <div class="col-md-6">
 
                                     <label class="form-label small fw-semibold">
-                                        N° Ticket
+                                        Projets
                                     </label>
 
-                                    <div class="input-group">
+                               
+                                    <select class="form-select"  name="project_id" id="projets">
 
-                                        <span class="input-group-text bg-white">
-                                            <i class="ti ti-hash"></i>
-                                        </span>
+                                        <option value="">Sélectionner un projet</option>
+                                        @if(isset($projects))
+                                            @foreach($projects as $project)
+                                                <option value="{{ $project->id }}">{{ $project->nom_projet }}</option>
+                                            @endforeach
+                                        @endif
 
-                                        <input type="text"
-                                               class="form-control"
-                                               value="CM-2026-0001"
-                                               readonly>
-
-                                    </div>
-
+                                    </select>
                                 </div>
-
-                                <!-- Site -->
+                               <!-- Site -->
                                 <div class="col-md-6">
 
                                     <label class="form-label small fw-semibold">
                                         Site
                                     </label>
 
-                                    <select class="form-select">
+                                    <select class="form-select" name="site_id" id="site">
 
                                         <option>Sélectionner</option>
                                         <option>Site AC01</option>
@@ -362,6 +380,10 @@
                                     </select>
 
                                 </div>
+                                <!-- Ticket -->
+                           
+
+                             
 
                                 <!-- Type incident -->
                                 <div class="col-md-6">
@@ -370,31 +392,15 @@
                                         Type incident
                                     </label>
 
-                                    <select id="type_incident"
+                                    <select id="type_incident"  name="incident_type_id"
                                             class="form-select">
 
                                         <option value="">Choisir</option>
-
-                                        <option value="energie">
-                                            Énergie
-                                        </option>
-
-                                        <option value="transmission">
-                                            Transmission
-                                        </option>
-
-                                        <option value="carburant">
-                                            Carburant
-                                        </option>
-
-                                        <option value="securite">
-                                            Sécurité
-                                        </option>
-
-                                        <option value="climatisation">
-                                            Climatisation
-                                        </option>
-
+                                    @if(isset($typesincident))
+                                        @foreach($typesincident as $type)
+                                            <option value="{{ $type->id }}">{{ $type->libelletypeincident  }}</option>
+                                        @endforeach
+                                    @endif
                                     </select>
 
                                 </div>
@@ -406,7 +412,7 @@
                                         Sous-type
                                     </label>
 
-                                    <select id="sous_type"
+                                    <select id="sous_type" name="incident_sub_type_id"
                                             class="form-select">
 
                                         <option>
@@ -445,11 +451,11 @@
                                         Niveau urgence
                                     </label>
 
-                                    <select class="form-select">
+                                    <select class="form-select" name="priority">
 
                                         <option>Faible</option>
-                                        <option>Moyen</option>
-                                        <option>Élevé</option>
+                                        <option>Moyenne</option>
+                                        <option>Élevée</option>
 
                                     </select>
 
@@ -462,7 +468,7 @@
                                         Impact
                                     </label>
 
-                                    <select class="form-select">
+                                    <select class="form-select" name="impact">
 
                                         <option>Faible</option>
                                         <option>Moyen</option>
@@ -478,6 +484,56 @@
 
                     </div>
 
+
+                     <!-- PRIORITE -->
+                    <div class="card border-0 bg-light rounded-4 mb-2">
+
+                        <div class="card-body p-3">
+
+                            <h6 class="fw-semibold small mb-2">
+
+                                <i class="ti ti-alert-triangle me-1 text-danger"></i>
+
+                                Assignation Requete CM
+
+                            </h6>
+
+                            <div class="row g-2">
+
+                                <!-- Urgence -->
+                                <div class="col-md-12">
+
+                                    <label class="form-label small fw-semibold">
+                                       Assigné à
+                                    </label>
+
+                                     <select class="form-select" name="assigned_to" id="assigned_to">
+
+        <option value="{{ Auth::id() }}">
+            Moi
+        </option>
+    @if(isset($techniciens))
+        @foreach($techniciens as $technicien)
+            @if($technicien->id != Auth::id())
+                <option value="{{ $technicien->id }}">
+                    {{ $technicien->name }}
+                </option>
+            @endif
+        @endforeach
+     @endif
+    </select>
+
+                                </div>
+
+                              
+
+                            </div>
+
+                        </div>
+
+                    </div>
+  
+
                     <!-- DESCRIPTION -->
                     <div class="card border-0 bg-light rounded-4 mb-2">
 
@@ -491,7 +547,7 @@
 
                             </h6>
 
-                            <textarea class="form-control border-0 shadow-sm"
+                            <textarea name="description" class="form-control border-0 shadow-sm"
                                       rows="3"
                                       placeholder="Décrire le problème..."></textarea>
 
@@ -520,7 +576,7 @@
                                     PNG, JPG jusqu'à 10MB
                                 </p>
 
-                                <input type="file"
+                                <input type="file" name="attachment"
                                        class="form-control">
 
                             </div>
@@ -529,7 +585,7 @@
 
                     </div>
 
-                </form>
+             
 
             </div>
 
@@ -537,15 +593,15 @@
             <div class="modal-footer border-0 px-3 py-2">
 
                 <button type="button"
-        class="btn btn-cancel rounded-pill px-4"
+        class="btn btn-cancel"
                         data-bs-dismiss="modal">
 
                     Annuler
 
                 </button>
 
-                <button type="button"
-                        class="btn btn-primary rounded-pill px-4">
+                <button type="submit" bt="btenregrequete"
+                        class="btn btn-primary">
 
                     <i class="ti ti-device-floppy me-1"></i>
 
@@ -554,11 +610,246 @@
                 </button>
 
             </div>
-
+   </form>
         </div>
 
     </div>
 
+</div>
+
+
+
+<div class="modal fade" id="viewCmRequestModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content border-0 shadow">
+
+            <!-- HEADER -->
+            <div class="modal-header bg-primary text-white">
+
+                <div class="d-flex align-items-center">
+
+                    <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center"
+                         style="width:55px;height:55px;">
+
+                        <i class="ti ti-file-description fs-3"></i>
+
+                    </div>
+
+                    <div class="ms-3">
+
+                        <h4 class="mb-1 fw-bold" id="view_ticket">
+                            CM-2026-00001
+                        </h4>
+
+                        <small class="opacity-75">
+                            Détails de la demande corrective
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="text-end">
+
+                    <div id="view_priority_badge" class="mb-2"></div>
+
+                    <div id="view_status_badge"></div>
+
+                </div>
+
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <!-- COLONNE GAUCHE -->
+                    <div class="col-lg-4">
+
+                        <div class="card shadow-sm border-0 mb-4">
+
+                            <div class="card-header bg-light">
+
+                                <h6 class="mb-0">
+                                    <i class="ti ti-info-circle me-2"></i>
+                                    Informations générales
+                                </h6>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="info-row">
+                                    <label>Projet</label>
+                                    <div id="view_project"></div>
+                                </div>
+
+                                <div class="info-row">
+                                    <label>Site</label>
+                                    <div id="view_site"></div>
+                                </div>
+
+                                <div class="info-row">
+                                    <label>Incident</label>
+                                    <div id="view_incident"></div>
+                                </div>
+
+                                <div class="info-row">
+                                    <label>Sous-type</label>
+                                    <div id="view_subincident"></div>
+                                </div>
+
+                                <div class="info-row">
+                                    <label>Assigné à</label>
+                                    <div id="view_assigned"></div>
+                                </div>
+
+                                <div class="info-row">
+                                    <label>Créé par</label>
+                                    <div id="view_creator"></div>
+                                </div>
+
+                                <div class="info-row mb-0">
+                                    <label>Date création</label>
+                                    <div id="view_created_at"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- COLONNE DROITE -->
+                    <div class="col-lg-8">
+
+                        <!-- DESCRIPTION -->
+                        <div class="card shadow-sm border-0 mb-4">
+
+                            <div class="card-header bg-light">
+
+                                <h6 class="mb-0">
+                                    <i class="ti ti-align-left me-2"></i>
+                                    Description
+                                </h6>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div id="view_description"
+                                     class="description-box">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- PIECE JOINTE -->
+                        <div class="card shadow-sm border-0 mb-4">
+
+                            <div class="card-header bg-light">
+
+                                <h6 class="mb-0">
+                                    <i class="ti ti-paperclip me-2"></i>
+                                    Pièce jointe
+                                </h6>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div id="view_attachment">
+
+                                    <div class="text-center text-muted py-5">
+
+                                        <i class="ti ti-photo fs-1"></i>
+
+                                        <p class="mt-3">
+                                            Aucune pièce jointe
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- HISTORIQUE -->
+                        <div class="card shadow-sm border-0">
+
+                            <div class="card-header bg-light">
+
+                                <h6 class="mb-0">
+
+                                    <i class="ti ti-history me-2"></i>
+
+                                    Historique
+
+                                </h6>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div id="view_history">
+
+                                    <!-- Timeline -->
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+
+            <div class="modal-footer">
+
+                <button class="btn btn-warning" id="btnEdit">
+
+                    <i class="ti ti-edit"></i>
+
+                    Modifier
+
+                </button>
+
+                <button class="btn btn-primary" id="btnAssign">
+
+                    <i class="ti ti-user-check"></i>
+
+                    Affecter
+
+                </button>
+
+                <button class="btn btn-success" id="btnValidate">
+
+                    <i class="ti ti-circle-check"></i>
+
+                    Valider
+
+                </button>
+
+                <button class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                    Fermer
+
+                </button>
+
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <!-- Modal Intervention -->
@@ -744,6 +1035,23 @@
 <script src="../assets/js/multi-lang.js"></script>
 <script src="../assets/js/plugins/feather.min.js"></script>
 
+<link rel="stylesheet"
+href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet"
+href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+
+<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
 <script>
 const sousTypes = {
     energie: [
@@ -775,31 +1083,7 @@ const sousTypes = {
     ]
 };
 
-document.getElementById('type_incident')
-.addEventListener('change', function () {
 
-    let type = this.value;
-
-    let sousType = document.getElementById('sous_type');
-
-    sousType.innerHTML = '<option>Choisir</option>';
-
-    if (sousTypes[type]) {
-
-        sousTypes[type].forEach(function(item) {
-
-            let option = document.createElement('option');
-
-            option.value = item;
-            option.text = item;
-
-            sousType.appendChild(option);
-
-        });
-
-    }
-
-});
 </script>
 
 <!---Script pour le modal Intervention --> 
@@ -946,9 +1230,276 @@ document.addEventListener('DOMContentLoaded', function() {
       import { DataTable } from '../assets/js/plugins/module.js';
       window.dt = new DataTable('#pc-dt-simple');
     </script>
+<script>
 
+      $(function () {
+
+  $.ajaxSetup({
+
+        headers:{
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+
+    });
+
+});
+
+var tablerequetecm;
+
+$(document).ready(function() {
+       
+     $('#type_incident').prop('selectedIndex', 0);
+     $("#projets").prop('selectedIndex', 0);
+     $("#site").prop('selectedIndex', 0);
+    //alert('Document ready!'); // Vérifie que le document est prêt
+
+
+
+tablerequetecm = $('#tablerequetecm').DataTable({
+
+    processing: true,
+    serverSide: true,
+    responsive: true,
+    autoWidth: false,
+scrollX: false,
+    ajax: {
+        url: "{{ route('cm.datatable') }}",
+        type: "GET"
+    },
+    responsive: {
+    details: {
+        type: 'column',
+        target: 0
+    }
+},
+
+    columns: [
+            {
+        className: 'dtr-control',
+        orderable: false,
+        data: null,
+        defaultContent: ''
+    },
+
+        { data: 'ticket', name: 'ticket' },
+
+      //  { data: 'projet', name: 'project.nom_projet' },
+
+       // { data: 'site', name: 'site.site_name' },
+        { data: 'site_code', name: 'site.site_code' },
+
+        { data: 'incident', name: 'incidentType.libelletypeincident' },
+
+        { data: 'assigne', name: 'assignedTo.name', orderable: false },
+
+        { data: 'priority', name: 'priority' },
+
+      //  { data: 'impact', name: 'impact' },
+
+        { data: 'status', name: 'status' },
+
+      //  { data: 'createur', name: 'creator.name' },
+
+        { data: 'created_at', name: 'created_at' },
+
+        {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+            searchable: false,
+            className: 'text-end'
+        }
+
+    ],
+
+    order: [[6, 'desc']],
+
+    language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.8/i18n/fr-FR.json"
+    }
+
+});
+
+
+
+$('#tablerequetecm').on('click', '.btnShow', function () {
+
+$("#viewCmRequestModal").modal("show")
+
+});
+
+    $('#projets').on('change', function () {
+
+    //alert('Projet sélectionné : ' + $(this).val()); // Vérifie la valeur sélectionnée
+  
+  let projectId = $(this).val();
+
+    let site = $('#site');
+     site.empty();
+
+    site.append('<option value="">Chargement...</option>');
+
+    if(projectId === ''){
+        site.html('<option value="">Sélectionner d\'abord un projet</option>');
+        return;
+    }
+
+    $.get('/siteslist/by-project/' + projectId, function(data){
+
+        site.empty();
+
+        site.append('<option value="">Choisir</option>');
+
+        $.each(data, function(index, item){
+
+            site.append(
+                '<option value="'+item.id+'">'+
+                    item.site_code+
+                '</option>'
+            );
+
+        });
+
+    });
+
+
+
+});
+
+    $('#type_incident').on('change', function () {
+  let typeId = $(this).val();
+
+   let sousType = $('#sous_type');
+ sousType.empty();
+
+    sousType.append('<option value="">Chargement...</option>');
+    if(typeId === ''){
+        sousType.html('<option value="">Sélectionner d\'abord un type</option>');
+        return;
+    }
+
+    $.get('/incident-soustypeslist/by-type/' + typeId, function(data){
+
+        sousType.empty();
+
+        sousType.append('<option value="">Choisir</option>');
+
+        $.each(data, function(index, item){
+
+            sousType.append(
+                '<option value="'+item.id+'">'+
+                    item.libellesoustype+
+                '</option>'
+            );
+
+        });
+
+    });
+});
+    });
+
+
+
+
+
+
+$('#cmRequestForm').submit(function(e){
+
+    e.preventDefault();
+
+    let formData = new FormData($('#cmRequestForm')[0]);
+
+    $('#modalLoading').removeClass('d-none');
+
+    $.ajax({
+
+        url: "{{ route('cm_requests.store') }}",
+        type: "POST",
+        data: formData,
+
+        processData: false,
+        contentType: false,
+        cache: false,
+
+        beforeSend: function () {
+
+            $('#btenregrequete')
+                .prop('disabled', true)
+                .html('<i class="ti ti-loader"></i> Enregistrement...');
+
+        },
+
+        success: function (response) {
+
+        $('#modalLoading').addClass('d-none');
+
+            $('#btenregrequete')
+                .prop('disabled', false)
+                .html('Enregistrer');
+
+            if(response.status){
+
+            
+
+                $('#cmRequestForm')[0].reset();
+
+               // $('#cmRequestModal').modal('hide');
+
+               alert(response.message);
+
+                tablerequetecm.ajax.reload(null, false);
+
+            }
+
+        },
+
+        error: function (xhr) {
+
+        $('#modalLoading').addClass('d-none');
+            $('#btenregrequete')
+                .prop('disabled', false)
+                .html('Enregistrer');
+
+            if(xhr.status == 422){
+
+                let errors = xhr.responseJSON.errors;
+
+                $('.invalid-feedback').remove();
+                $('.is-invalid').removeClass('is-invalid');
+
+                $.each(errors, function(key, value){
+
+                    $('[name="'+key+'"]')
+                        .addClass('is-invalid')
+                        .after('<div class="invalid-feedback">'+value[0]+'</div>');
+
+                });
+
+            }else{
+
+
+                alert(
+                    'Erreur',
+                    'Une erreur est survenue.',
+                    'error'
+                );
+
+            }
+
+        }
+
+    });
+
+});
+
+
+
+
+    </script>
    
-
+<script>
+    
+    </script>
   </body>
   <!-- [Body] end -->
 </html>
